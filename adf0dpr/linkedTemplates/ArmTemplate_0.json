@@ -17,7 +17,7 @@
 		},
 		"ls_athelets_http_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://github.com/ekzindegi/data/blob/main/Athletes.csv"
+			"defaultValue": "https://github.com/ekzindegi/data/blob/main/"
 		}
 	},
 	"variables": {
@@ -95,12 +95,14 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "HttpServerLocation"
+						"type": "HttpServerLocation",
+						"relativeUrl": "Athletes.csv"
 					},
 					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
 					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
+					"firstRowAsHeader": false,
+					"quoteChar": null
 				},
 				"schema": [
 					{
@@ -111,6 +113,73 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_athelets_http')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/olymic_001_athelete')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "olymic_001_athelete",
+				"activities": [
+					{
+						"name": "athelete",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "HttpReadSettings",
+									"requestMethod": "GET"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ls_ds_tokio_http",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Jsonpout_gen2_olimpic",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ls_ds_tokio_http')]",
+				"[concat(variables('factoryId'), '/datasets/Jsonpout_gen2_olimpic')]"
 			]
 		}
 	]

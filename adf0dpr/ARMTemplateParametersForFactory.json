@@ -12,7 +12,7 @@
 			"value": "https://storage001dpr.dfs.core.windows.net/"
 		},
 		"ls_athelets_http_properties_typeProperties_url": {
-			"value": "https://github.com/ekzindegi/data/blob/main/Athletes.csv"
+			"value": "https://github.com/ekzindegi/data/blob/main/"
 		}
 	}
 }

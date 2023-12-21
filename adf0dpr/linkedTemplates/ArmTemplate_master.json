@@ -17,7 +17,7 @@
 		},
 		"ls_athelets_http_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://github.com/ekzindegi/data/blob/main/Athletes.csv"
+			"defaultValue": "https://github.com/ekzindegi/data/blob/main/"
 		},
 		"containerUri": {
 			"type": "string",
