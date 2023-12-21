@@ -1,0 +1,63 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf0dpr"
+		},
+		"ls_athelets_gen2out_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_athelets_gen2out'"
+		},
+		"ls_athelets_gen2out_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storage001dpr.dfs.core.windows.net/"
+		},
+		"ls_athelets_http_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://github.com/ekzindegi/data/blob/main/Athletes.csv"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adf0dpr_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_athelets_gen2out_accountKey": {
+						"value": "[parameters('ls_athelets_gen2out_accountKey')]"
+					},
+					"ls_athelets_gen2out_properties_typeProperties_url": {
+						"value": "[parameters('ls_athelets_gen2out_properties_typeProperties_url')]"
+					},
+					"ls_athelets_http_properties_typeProperties_url": {
+						"value": "[parameters('ls_athelets_http_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
