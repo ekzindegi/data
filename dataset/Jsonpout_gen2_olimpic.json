@@ -1,0 +1,20 @@
+{
+	"name": "Jsonpout_gen2_olimpic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_athelets_gen2out",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "olympic_athelete.csv",
+				"folderPath": "outData",
+				"fileSystem": "container001"
+			}
+		},
+		"schema": {}
+	}
+}
