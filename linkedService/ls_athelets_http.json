@@ -1,0 +1,13 @@
+{
+	"name": "ls_athelets_http",
+	"properties": {
+		"description": "https://github.com/ekzindegi/data/blob/main/Athletes.csv",
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://github.com/ekzindegi/data/blob/main/Athletes.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
